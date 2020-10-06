@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+        <context:property-placeholder location="classpath:value.properties"/>
+
+        <bean id="emp" class="demo.Employee">
+            <property name="id" value="${foo.id}"/>
+            <property name="name" value="${foo.name}"/>
+            <property name="agency" ref="myAgency"/>
+        </bean>
+        <bean id="myAgency"
+              class="demo.AgencyServices"/>
+        <bean id="customer"
+              class="demo.Customer">
+            <constructor-arg ref="myAgency"/>
+        </bean>
+        <bean id="reseller"
+              class="demo.Reseller">
+            <property name="agency" ref="myAgency"/>
+        </bean>
+</beans>
